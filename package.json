@@ -1,0 +1,21 @@
+{
+  "name": "passpack",
+  "version": "0.0.0",
+  "description": "Multi-tenancy (read: virtual hosts) for Passport.JS",
+  "main": "passpack.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/deoxxa/passpack.git"
+  },
+  "keywords": [
+    "passport",
+    "multi-tenant",
+    "multi",
+    "tenant",
+    "multiple",
+    "virtual",
+    "host"
+  ],
+  "author": "Conrad Pankoff <deoxxa@fknsrs.biz> (http://www.fknsrs.biz/)",
+  "license": "BSD"
+}
