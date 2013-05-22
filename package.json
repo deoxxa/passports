@@ -1,6 +1,6 @@
 {
   "name": "passpack",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Multi-tenancy (read: virtual hosts) for Passport.JS",
   "main": "passpack.js",
   "repository": {
