@@ -105,7 +105,7 @@ var passpack = new Passpack({
 
 Arguments
 
-* _options_ - an object specifying values for `_getConfig` and `createInstance`
+* _options_ - an object specifying values for `_getConfig` and `_createInstance`
 
 **attach**
 
