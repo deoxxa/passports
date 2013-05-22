@@ -109,7 +109,7 @@ Arguments
 
 **attach**
 
-Returns an express/connect-compatible middleware function for that attaches the
+Returns an express/connect-compatible middleware function that attaches the
 correct passport object to a request. You probably want this as the first
 passpack-related piece of middleware in your application.
 
