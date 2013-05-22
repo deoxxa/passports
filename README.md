@@ -28,7 +28,7 @@ Usage
 Passpack provides a framework for applications to define their own passport.js
 multi-tenanting implementations. It requires you to provide two functions:
 `_getConfig` and `_createInstance`. These functions are called when necessary to
-do exactly what they sound like they do, allowing you to complete control the
+do exactly what they sound like they do, allowing you to completely control the
 configuration and instantiation of the passport objects managed by passpack.
 
 You can see an example of how this all fits together below, in the "example"
