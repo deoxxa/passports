@@ -14,7 +14,7 @@ var Passpack = module.exports = function Passpack(options) {
     this._getConfig = options.getConfig;
   }
 };
-Passpack.prototype = Object.create(events.EventEmitter.prototype);
+Passpack.prototype = Object.create(events.EventEmitter.prototype, {constructor: {value: Passpack}});
 
 Passpack.prototype.getInstance = function getInstance(id, options, cb) {
   if (this._instances[id]) {
