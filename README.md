@@ -1,4 +1,4 @@
-Passpack
+Passports
 ========
 
 Multi-tenancy (read: virtual hosts) for Passport.JS
@@ -6,7 +6,7 @@ Multi-tenancy (read: virtual hosts) for Passport.JS
 Overview
 --------
 
-Passpack makes things easier if you're running a multi-tenanted application with
+Passports makes things easier if you're running a multi-tenanted application with
 [Passport.JS](http://passportjs.org/) by abstracting away some of the book
 keeping involved with instantiating multiple passport instances and choosing
 which to use for a given request.
@@ -16,20 +16,20 @@ Installation
 
 Available via [npm](http://npmjs.org/):
 
-> $ npm install passpack
+> $ npm install passports
 
 Or via git:
 
-> $ npm install git://github.com/deoxxa/passpack.git
+> $ npm install git://github.com/deoxxa/passports.git
 
 Usage
 -----
 
-Passpack provides a framework for applications to define their own passport.js
+Passports provides a framework for applications to define their own passport.js
 multi-tenanting implementations. It requires you to provide two functions:
 `_getConfig` and `_createInstance`. These functions are called when necessary to
 do exactly what they sound like they do, allowing you to completely control the
-configuration and instantiation of the passport objects managed by passpack.
+configuration and instantiation of the passport objects managed by passports.
 
 You can see an example of how this all fits together below, in the "example"
 section.
@@ -43,7 +43,7 @@ error (or null), an ID, and optionally some configuration parameters for
 `_createInstance` to use in instantiating the passport object.
 
 ```javascript
-passpack._getConfig = function _getConfig(req, cb) {
+passports._getConfig = function _getConfig(req, cb) {
   cb(null, req.host, {
     realm: "Please log in to " + req.host,
   });
@@ -59,7 +59,7 @@ of lazy instantiation. It's given some configuration parameters (from
 null) and the resultant passport instance.
 
 ```javascript
-passpack._createInstance = function _createInstance(options, cb) {
+passports._createInstance = function _createInstance(options, cb) {
   var instance = new Passport();
 
   instance.use("basic", new BasicStrategy(options, function(name, password, done) {
@@ -85,19 +85,19 @@ API
 
 **constructor**
 
-Constructs a new Passpack object, optionally providing the `_getConfig` and
+Constructs a new Passports object, optionally providing the `_getConfig` and
 `_createInstance` functions in an object.
 
 ```javascript
-new Passpack([options]);
+new Passports([options]);
 ```
 
 ```javascript
 // basic instantiation
-var passpack = new Passpack();
+var passports = new Passports();
 
 // instantiation with functions
-var passpack = new Passpack({
+var passports = new Passports({
   getConfig: myGetConfig,
   createInstance: myCreateInstance,
 });
@@ -111,14 +111,14 @@ Arguments
 
 Returns an express/connect-compatible middleware function that attaches the
 correct passport object to a request. You probably want this as the first
-passpack-related piece of middleware in your application.
+passports-related piece of middleware in your application.
 
 ```javascript
-passpack.attach();
+passports.attach();
 ```
 
 ```javascript
-app.use(passpack.attach());
+app.use(passports.attach());
 ```
 
 **middleware**
@@ -127,11 +127,11 @@ Wraps a passport middleware function so that it'll be called using the correct
 passport instance, optionally passing some arguments to it.
 
 ```javascript
-passpack.middleware(name, [arg1, [arg2, ...]]);
+passports.middleware(name, [arg1, [arg2, ...]]);
 ```
 
 ```javascript
-app.use(passpack.middleware("authenticate", "basic"));
+app.use(passports.middleware("authenticate", "basic"));
 ```
 
 Arguments
@@ -142,14 +142,14 @@ Arguments
 **#added**
 
 `added` is an event that's fired with the id of a passport object after it's
-created and added to the passpack collection.
+created and added to the passports collection.
 
 ```javascript
-passpack.on("added", onAdded);
+passports.on("added", onAdded);
 ```
 
 ```javascript
-passpack.on("added", function onAdded(id, instance) {
+passports.on("added", function onAdded(id, instance) {
   console.log(id);
 });
 ```
@@ -162,25 +162,25 @@ Parameters
 Example
 -------
 
-Also see [example.js](https://github.com/deoxxa/passpack/blob/master/example.js).
+Also see [example.js](https://github.com/deoxxa/passports/blob/master/example.js).
 
 ```javascript
-// $ npm install express passpack passport passport-http
+// $ npm install express passports passport passport-http
 
 var express = require("express"),
-    Passpack = require("passpack"),
+    Passports = require("passports"),
     Passport = require("passport").Passport,
     BasicStrategy = require("passport-http").BasicStrategy;
 
-var passpack = new Passpack();
+var passports = new Passports();
 
-passpack._getConfig = function _getConfig(req, cb) {
+passports._getConfig = function _getConfig(req, cb) {
   return cb(null, req.host, {
     realm: req.host,
   });
 };
 
-passpack._createInstance = function _createInstance(options, cb) {
+passports._createInstance = function _createInstance(options, cb) {
   var instance = new Passport();
 
   instance.use("basic", new BasicStrategy(options, function(name, password, done) {
@@ -205,12 +205,12 @@ var app = express();
 app.use(express.logger());
 app.use(express.cookieParser());
 app.use(express.session({secret: "keyboard cat"}));
-app.use(passpack.attach());
-app.use(passpack.middleware("initialize"));
-app.use(passpack.middleware("session"));
+app.use(passports.attach());
+app.use(passports.middleware("initialize"));
+app.use(passports.middleware("session"));
 app.use(app.router);
 
-app.get("/login", passpack.middleware("authenticate", "basic", {
+app.get("/login", passports.middleware("authenticate", "basic", {
   successRedirect: "/",
 }));
 

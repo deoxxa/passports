@@ -1,11 +1,11 @@
 {
-  "name": "passpack",
+  "name": "passports",
   "version": "0.1.1",
   "description": "Multi-tenancy (read: virtual hosts) for Passport.JS",
-  "main": "passpack.js",
+  "main": "passports.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/deoxxa/passpack.git"
+    "url": "git://github.com/deoxxa/passports.git"
   },
   "keywords": [
     "passport",
