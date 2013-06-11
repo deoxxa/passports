@@ -1,6 +1,6 @@
 {
   "name": "passports",
-  "version": "0.1.1",
+  "version": "0.2.1",
   "description": "Multi-tenancy (read: virtual hosts) for Passport.JS",
   "main": "passports.js",
   "repository": {
