@@ -77,3 +77,7 @@ Passpack.prototype.middleware = function middleware(name) {
     return req.passport[fn](req, res, next);
   };
 };
+
+Passpack.prototype.clearInstance = function clearInstance(id) {
+  delete this._instances[id];
+};
