@@ -139,6 +139,21 @@ Arguments
 * _name_ - name of the passport middleware function.
 * _argN_ - arguments to be passed to the middleware.
 
+
+**clearInstance**
+
+Clears a cached passport instance so it can be reinstatiated when an authentication
+strategy needs to change dynamically.
+
+```javascript
+passports.clearInstance(id);
+```
+
+Arguments
+
+* _id_ - id of the passport instance
+
+
 **#added**
 
 `added` is an event that's fired with the id of a passport object after it's
